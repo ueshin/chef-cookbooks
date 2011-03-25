@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<!-- Put site-specific property overrides in this file. -->
+
+<configuration>
+
+<% if @namedir.size > 0 -%>
+  <property>
+    <name>dfs.name.dir</name>
+    <value><%= @namedir.join(',') %></value>
+  </property>
+<% end -%>
+
+<% if @datadir.size > 0 -%>
+  <property>
+    <name>dfs.data.dir</name>
+    <value><%= @datadir.join(',') %></value>
+  </property>
+<% end -%>
+
+  <property>
+    <name>dfs.http.address</name>
+    <value><%= @namenode[:hostname] %>:50070</value>
+  </property>
+
+  <property>
+    <name>dfs.datanode.max.xcievers</name>
+    <value>5000</value>
+  </property>
+
+</configuration>
