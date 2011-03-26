@@ -22,3 +22,7 @@ include_recipe "hbase"
 package "hadoop-hbase-regionserver" do
   version node[:hbase][:version]
 end
+
+service "hadoop-hbase-regionserver" do
+  supports :start => true, :stop => true, :restart => true, :status => true
+end

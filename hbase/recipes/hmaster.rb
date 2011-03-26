@@ -22,3 +22,7 @@ include_recipe "hbase"
 package "hadoop-hbase-master" do
   version node[:hbase][:version]
 end
+
+service "hadoop-hbase-master" do
+  supports :start => true, :stop => true, :restart => true, :status => true
+end

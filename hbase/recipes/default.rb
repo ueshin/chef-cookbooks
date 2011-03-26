@@ -31,22 +31,6 @@ user "hbase" do
   shell "/sbin/nologin"
 end
 
-hbasetmpdir = node[:hbase][:tmp][:dir]
-
-directory File.dirname(hbasetmpdir) do
-  mode "0755"
-  recursive true
-  not_if do
-    File.exists?(File.dirname(hbasetmpdir))
-  end
-end
-
-directory hbasetmpdir do
-  owner "hbase"
-  group "hbase"
-  mode "0777"
-end
-
 package "hadoop-hbase" do
   version node[:hbase][:version]
 end
@@ -62,7 +46,7 @@ template "/etc/hbase/conf/hbase-site.xml" do
 
   variables( :namenode     => search(:node, 'role:NameNode')[0],
              :namenodeport => node[:hadoop][:core][:namenodeport],
-             :hbasetmpdir  => hbasetmpdir,
+             :hbasetmpdir  => node[:hbase][:tmp][:dir],
              :zookeepers   => search(:node, 'role:ZooKeeper').sort_by { |zk| zk[:hostname] } )
 end
 
