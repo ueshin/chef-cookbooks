@@ -31,6 +31,11 @@ user "hbase" do
   shell "/sbin/nologin"
 end
 
+group "hadoop" do
+  members ["hbase"]
+  append true
+end
+
 package "hadoop-hbase" do
   version node[:hbase][:version]
 end

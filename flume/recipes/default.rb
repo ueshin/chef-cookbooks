@@ -28,6 +28,11 @@ user "flume" do
   home "/var/run/flume"
 end
 
+group "hadoop" do
+  members ["flume"]
+  append true
+end
+
 package "flume" do
   version node[:flume][:version]
 end

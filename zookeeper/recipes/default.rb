@@ -29,6 +29,11 @@ user "zookeeper" do
   shell "/sbin/nologin"
 end
 
+group "hadoop" do
+  members ["zookeeper"]
+  append true
+end
+
 package "hadoop-zookeeper" do
   version node[:zookeeper][:version]
 end
