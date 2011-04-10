@@ -37,3 +37,8 @@ default[:hadoop][:mapred][:temp][:dir]     = nil # "#{default[:hadoop][:core][:t
 default[:hadoop][:mapred][:tasktracker][:map][:tasks][:maximum]    = 2
 default[:hadoop][:mapred][:tasktracker][:reduce][:tasks][:maximum] = 2
 default[:hadoop][:mapred][:child][:java][:opts]                    = nil #"-Xmx200m"
+
+
+default[:hadoop][:lzo][:github]  = "https://github.com/kevinweil/hadoop-lzo/tarball/2ad6654f3e9cad97d13f716e51a0509253c0aabb"
+default[:hadoop][:lzo][:archive] = "kevinweil-hadoop-lzo-2ad6654"
+default[:hadoop][:lzo][:version] = "0.4.10"

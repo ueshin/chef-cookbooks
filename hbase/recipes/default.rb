@@ -61,3 +61,13 @@ template "/etc/hbase/conf/regionservers" do
 
   variables( :regionservers => search(:node, 'role:RegionServer').sort_by { |rs| rs[:hostname] } )
 end
+
+
+link "/usr/lib/hbase/lib/hadoop-lzo-#{node[:hadoop][:lzo][:version]}.jar" do
+  to "/usr/lib/hadoop-0.20/lib/hadoop-lzo-#{node[:hadoop][:lzo][:version]}.jar"
+  only_if "test -f /usr/lib/hadoop-0.20/lib/hadoop-lzo-#{node[:hadoop][:lzo][:version]}.jar"
+end
+
+link "/usr/lib/hbase/lib/native" do
+  to "/usr/lib/hadoop-0.20/lib/native"
+end

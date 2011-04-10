@@ -17,6 +17,8 @@
 # limitations under the License.
 #
 
+include_recipe "hadoop::lzo"
+
 directory "/usr/lib/hadoop-0.20" do
   mode "0755"
   recursive true
@@ -84,4 +86,20 @@ end
 cookbook_file "/etc/hadoop/conf/hadoop-metrics.properties" do
   source "hadoop-metrics.properties"
   mode "0644"
+end
+
+
+execute "cp hadoop-lzo-#{node[:hadoop][:lzo][:version]}.jar /usr/lib/hadoop-0.20/lib"
+  cwd "/usr/local/src/#{node[:hadoop][:lzo][:archive]}/build"
+  creates "/usr/lib/hadoop-0.20/lib/hadoop-lzo-#{node[:hadoop][:lzo][:version]}.jar"
+end
+
+directory "/usr/lib/hadoop-0.20/lib/native/Linux-amd64-64" do
+  mode "0755"
+  recursive true
+end
+
+execute "cp -d native/Linux-amd64-64/lib/* /usr/lib/hadoop-0.20/lib/native/Linux-amd64-64/"
+  cwd "/usr/local/src/#{node[:hadoop][:lzo][:archive]}/build"
+  creates "/usr/lib/hadoop-0.20/lib/native/Linux-amd64-64/libgplcompression.so.0.0.0"
 end

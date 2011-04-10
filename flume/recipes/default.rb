@@ -47,3 +47,22 @@ template "/etc/flume/conf/flume-site.xml" do
              :flumemasters => search(:node, 'role:FlumeMaster').sort_by { |fm| fm[:hostname] },
              :zookeepers   => search(:node, 'role:ZooKeeper'  ).sort_by { |zk| zk[:hostname] } )
 end
+
+
+link "/usr/lib/flume/lib/hadoop-lzo-#{node[:hadoop][:lzo][:version]}.jar" do
+  to "/usr/lib/hadoop-0.20/lib/hadoop-lzo-#{node[:hadoop][:lzo][:version]}.jar"
+  only_if "test -f /usr/lib/hadoop-0.20/lib/hadoop-lzo-#{node[:hadoop][:lzo][:version]}.jar"
+end
+
+%w{
+  libgplcompression.a
+  libgplcompression.la
+  libgplcompression.so
+  libgplcompression.so.0
+  libgplcompression.so.0.0.0
+}.each do |file|
+  link "/usr/lib/flume/lib/#{file}" do
+    to "/usr/lib/hadoop-0.20/lib/native/Linux-amd64-64/#{file}"
+    only_if "test -f /usr/lib/hadoop-0.20/lib/native/Linux-amd64-64/#{file}"
+  end
+end
