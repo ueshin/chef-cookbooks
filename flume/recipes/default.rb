@@ -35,6 +35,7 @@ end
 
 package "flume" do
   version node[:flume][:version]
+#  action :upgrade
 end
 
 template "/etc/flume/conf/flume-site.xml" do

@@ -36,6 +36,7 @@ end
 
 package "hadoop-zookeeper" do
   version node[:zookeeper][:version]
+#  action :upgrade
 end
 
 template "/etc/zookeeper/zoo.cfg" do

@@ -17,6 +17,6 @@
 # limitations under the License.
 #
 
-default[:hbase][:version] = "0.90.1+8"
+default[:hbase][:version] = "0.90.1+15"
 
 default[:hbase][:tmp][:dir] = "#{node[:hadoop][:core][:tmp][:dir]}/hbase"

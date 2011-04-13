@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-default[:hadoop][:version] = "0.20.2+887"
+default[:hadoop][:version] = "0.20.2+923"
 
 default[:hadoop][:core][:namenodeport]     = 9000
 default[:hadoop][:mapred][:jobtrackerport] = 9001

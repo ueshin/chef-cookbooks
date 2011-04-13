@@ -17,4 +17,4 @@
 # limitations under the License.
 #
 
-default[:zookeeper][:version] = "3.3.2+7"
+default[:zookeeper][:version] = "3.3.3+12"

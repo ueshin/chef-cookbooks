@@ -81,6 +81,7 @@ end
 
 package "hadoop-0.20" do
   version node[:hadoop][:version]
+#  action :upgrade
 end
 
 cookbook_file "/etc/hadoop/conf/hadoop-metrics.properties" do
@@ -89,7 +90,7 @@ cookbook_file "/etc/hadoop/conf/hadoop-metrics.properties" do
 end
 
 
-execute "cp hadoop-lzo-#{node[:hadoop][:lzo][:version]}.jar /usr/lib/hadoop-0.20/lib"
+execute "cp hadoop-lzo-#{node[:hadoop][:lzo][:version]}.jar /usr/lib/hadoop-0.20/lib" do
   cwd "/usr/local/src/#{node[:hadoop][:lzo][:archive]}/build"
   creates "/usr/lib/hadoop-0.20/lib/hadoop-lzo-#{node[:hadoop][:lzo][:version]}.jar"
 end
@@ -99,7 +100,7 @@ directory "/usr/lib/hadoop-0.20/lib/native/Linux-amd64-64" do
   recursive true
 end
 
-execute "cp -d native/Linux-amd64-64/lib/* /usr/lib/hadoop-0.20/lib/native/Linux-amd64-64/"
+execute "cp -d native/Linux-amd64-64/lib/* /usr/lib/hadoop-0.20/lib/native/Linux-amd64-64/" do
   cwd "/usr/local/src/#{node[:hadoop][:lzo][:archive]}/build"
   creates "/usr/lib/hadoop-0.20/lib/native/Linux-amd64-64/libgplcompression.so.0.0.0"
 end

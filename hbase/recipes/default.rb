@@ -38,6 +38,7 @@ end
 
 package "hadoop-hbase" do
   version node[:hbase][:version]
+#  action :upgrade
 end
 
 cookbook_file "/etc/hbase/conf/hadoop-metrics.properties" do
