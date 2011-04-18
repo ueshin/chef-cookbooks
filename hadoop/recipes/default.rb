@@ -84,6 +84,13 @@ package "hadoop-0.20" do
 #  action :upgrade
 end
 
+template "/etc/hadoop/conf/hadoop-env.sh" do
+  source "hadoop-env.sh.erb"
+  mode "0644"
+
+  variables( :heapsize => node[:hadoop][:heapsize] )
+end
+
 cookbook_file "/etc/hadoop/conf/hadoop-metrics.properties" do
   source "hadoop-metrics.properties"
   mode "0644"

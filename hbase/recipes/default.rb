@@ -41,6 +41,13 @@ package "hadoop-hbase" do
 #  action :upgrade
 end
 
+template "/etc/hbase/conf/hbase-env.sh" do
+  source "hbase-env.sh.erb"
+  mode "0644"
+
+  variables( :heapsize => node[:hbase][:heapsize] )
+end
+
 cookbook_file "/etc/hbase/conf/hadoop-metrics.properties" do
   source "hadoop-metrics.properties"
   mode "0644"

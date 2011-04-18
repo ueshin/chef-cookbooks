@@ -19,4 +19,6 @@
 
 default[:hbase][:version] = "0.90.1+15"
 
+default[:hbase][:heapsize] = 1000
+
 default[:hbase][:tmp][:dir] = "#{node[:hadoop][:core][:tmp][:dir]}/hbase"

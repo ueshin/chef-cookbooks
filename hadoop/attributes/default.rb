@@ -19,6 +19,8 @@
 
 default[:hadoop][:version] = "0.20.2+923"
 
+default[:hadoop][:heapsize] = 1000
+
 default[:hadoop][:core][:namenodeport]     = 9000
 default[:hadoop][:mapred][:jobtrackerport] = 9001
 
