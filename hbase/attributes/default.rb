@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-default[:hbase][:version] = "0.90.1+15"
+default[:hbase][:version] = "0.90.1+15.18"
 
 default[:hbase][:heapsize] = 1000
 

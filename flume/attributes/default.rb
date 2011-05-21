@@ -17,6 +17,6 @@
 # limitations under the License.
 #
 
-default[:flume][:version] = "0.9.3+15"
+default[:flume][:version] = "0.9.3+15.3"
 
 default[:flume][:master][:serverid] = nil

@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-default[:hadoop][:version] = "0.20.2+923"
+default[:hadoop][:version] = "0.20.2+923.21"
 
 default[:hadoop][:heapsize] = 1000
 
