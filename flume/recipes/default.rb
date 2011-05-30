@@ -17,6 +17,9 @@
 # limitations under the License.
 #
 
+include_recipe "hadoop"
+include_recipe "zookeeper"
+
 group "flume" do
   gid 205
 end

@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: zookeeper
-# Recipe:: default
+# Recipe:: server
 #
 # Copyright 2011, Happy-Camper Street
 #
@@ -17,33 +17,21 @@
 # limitations under the License.
 #
 
-group "zookeeper" do
-  gid 203
-end
+include_recipe "zookeeper"
 
-user "zookeeper" do
-  uid "203"
-  gid "zookeeper"
-  comment "ZooKeeper"
-  home "/var/run/zookeeper"
-  shell "/sbin/nologin"
-end
-
-group "hadoop" do
-  members ["zookeeper"]
-  append true
-end
-
-package "hadoop-zookeeper" do
-  version node[:zookeeper][:version]
-#  action :upgrade
-end
-
-template "/etc/zookeeper/zoo.cfg" do
-  source "zoo.cfg.erb"
+template "/var/zookeeper/myid" do
+  source "myid.erb"
   mode "0644"
   owner "zookeeper"
   group "zookeeper"
 
-  variables( :zookeepers => search(:node, 'role:ZooKeeper').sort_by { |zk| zk[:hostname] } )
+  variables( :myid => node[:zookeeper][:myid] )
+end
+
+package "hadoop-zookeeper-server" do
+  version node[:zookeeper][:version]
+end
+
+service "hadoop-zookeeper" do
+  supports :start => true, :stop => true, :status => true, :restart => true, :upgrade => true
 end

@@ -18,6 +18,7 @@
 #
 
 include_recipe "hadoop"
+include_recipe "zookeeper"
 
 group "hbase" do
   gid 204
