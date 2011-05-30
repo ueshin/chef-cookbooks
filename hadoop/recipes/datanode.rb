@@ -28,7 +28,7 @@ node[:hadoop][:hdfs][:data][:dir].each do |dir|
   directory dir do
     owner "hdfs"
     group "hadoop"
-    mode "0755"
+    mode "0700"
   end
 end
 
