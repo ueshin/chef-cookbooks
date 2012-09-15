@@ -2,7 +2,7 @@
 # Cookbook Name:: hbase
 # Recipe:: regionserver
 #
-# Copyright 2011, Happy-Camper Street
+# Copyright 2011-2012, Happy-Camper Street
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,10 +19,6 @@
 
 include_recipe "hbase"
 
-package "hadoop-hbase-regionserver" do
+package "hbase-regionserver" do
   version node[:hbase][:version]
-end
-
-service "hadoop-hbase-regionserver" do
-  supports :start => true, :stop => true, :restart => true, :status => true
 end

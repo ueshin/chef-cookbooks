@@ -2,7 +2,7 @@
 # Cookbook Name:: hadoop
 # Recipe:: namenode
 #
-# Copyright 2011, Happy-Camper Street
+# Copyright 2011-2012, Happy-Camper Street
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,26 +19,6 @@
 
 include_recipe "hadoop::hdfs"
 
-node[:hadoop][:hdfs][:name][:dir].each do |dir|
-  directory File.dirname(dir) do
-    mode "0755"
-    recursive true
-    not_if do
-      File.exists?(File.dirname(dir))
-    end
-  end
-
-  directory dir do
-    owner "hdfs"
-    group "hadoop"
-    mode "0755"
-  end
-end
-
-package "hadoop-0.20-namenode" do
+package "hadoop-hdfs-namenode" do
   version node[:hadoop][:version]
-end
-
-service "hadoop-0.20-namenode" do
-  supports :start => true, :stop => true, :status => true, :restart => true, :upgrade => true
 end

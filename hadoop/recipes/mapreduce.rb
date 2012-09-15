@@ -1,8 +1,8 @@
 #
-# Cookbook Name:: hbase
-# Recipe:: hmaster
+# Cookbook Name:: hadoop
+# Recipe:: mapreduce
 #
-# Copyright 2011, Happy-Camper Street
+# Copyright 2011-2012, Happy-Camper Street
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,12 +17,30 @@
 # limitations under the License.
 #
 
-include_recipe "hbase"
+include_recipe "hadoop::nodemanager"
 
-package "hadoop-hbase-master" do
-  version node[:hbase][:version]
+directory "/usr/lib/hadoop-mapreduce" do
+  mode "0755"
+  recursive true
 end
 
-service "hadoop-hbase-master" do
-  supports :start => true, :stop => true, :restart => true, :status => true
+group "mapred" do
+  gid 213
+end
+
+user "mapred" do
+  uid "213"
+  gid "mapred"
+  comment "Hadoop MapReduce"
+  home "/var/lib/hadoop-mapreduce"
+end
+
+group "hadoop" do
+  action :modify
+  members ["mapred"]
+  append true
+end
+
+package "hadoop-mapreduce" do
+  version node[:hadoop][:version]
 end

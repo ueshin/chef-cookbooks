@@ -1,8 +1,8 @@
 #
-# Cookbook Name:: ganglia
-# Recipe:: default
+# Cookbook Name:: hadoop
+# Recipe:: proxyserver
 #
-# Copyright 2011, Happy-Camper Street
+# Copyright 2011-2012, Happy-Camper Street
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,21 +17,8 @@
 # limitations under the License.
 #
 
-directory "/var/lib/ganglia" do
-  mode "0755"
-  recursive true
-end
+include_recipe "hadoop::yarn"
 
-group "ganglia" do
-  gid 151
+package "hadoop-yarn-proxyserver" do
+  version node[:hadoop][:version]
 end
-
-user "ganglia" do
-  uid "151"
-  gid "ganglia"
-  comment "Ganglia Monitoring System"
-  home "/var/lib/ganglia"
-  shell "/sbin/nologin"
-end
-
-package "ganglia"

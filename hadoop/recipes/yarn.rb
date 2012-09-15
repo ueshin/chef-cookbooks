@@ -1,8 +1,8 @@
 #
-# Cookbook Name:: flume
-# Attributes:: default
+# Cookbook Name:: hadoop
+# Recipe:: yarn
 #
-# Copyright 2011, Happy-Camper Street
+# Copyright 2011-2012, Happy-Camper Street
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,6 +17,29 @@
 # limitations under the License.
 #
 
-default[:flume][:version] = "0.9.3+15.3"
+include_recipe "hadoop"
 
-default[:flume][:master][:serverid] = nil
+directory "/usr/lib/hadoop-yarn" do
+  mode "0755"
+end
+
+group "yarn" do
+  gid 212
+end
+
+user "yarn" do
+  uid "212"
+  gid "yarn"
+  comment "Hadoop Yarn"
+  home "/var/lib/hadoop-yarn"
+end
+
+group "hadoop" do
+  action :modify
+  members ["yarn"]
+  append true
+end
+
+package "hadoop-yarn" do
+  version node[:hadoop][:version]
+end

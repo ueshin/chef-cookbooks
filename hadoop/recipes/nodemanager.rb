@@ -1,8 +1,8 @@
 #
-# Cookbook Name:: ganglia
-# Recipe:: gmond
+# Cookbook Name:: hadoop
+# Recipe:: nodemanager
 #
-# Copyright 2011, Happy-Camper Street
+# Copyright 2011-2012, Happy-Camper Street
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,16 +17,8 @@
 # limitations under the License.
 #
 
-include_recipe "ganglia"
+include_recipe "hadoop::yarn"
 
-package "ganglia-gmond"
-
-template "/etc/gmond.conf" do
-  source "gmond.conf.erb"
-  mode "0644"
-end
-
-service "gmond" do
-  supports :start => true, :stop => true, :restart => true, :status => true
-  action [ :enable, :start ]
+package "hadoop-yarn-nodemanager" do
+  version node[:hadoop][:version]
 end

@@ -2,7 +2,7 @@
 # Cookbook Name:: hadoop
 # Recipe:: hdfs
 #
-# Copyright 2011, Happy-Camper Street
+# Copyright 2011-2012, Happy-Camper Street
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,37 +19,27 @@
 
 include_recipe "hadoop"
 
-namenode = search(:node, 'role:NameNode')[0]
-
-template "/etc/hadoop/conf/core-site.xml" do
-  source "core-site.xml.erb"
-  mode "0644"
-
-  variables( :namenode      => namenode,
-             :hadooptmpdir  => node[:hadoop][:core][:tmp][:dir],
-             :namenodeport  => node[:hadoop][:core][:namenodeport],
-             :checkpointdir => node[:hadoop][:core][:checkpoint][:dir] )
+directory "/usr/lib/hadoop-hdfs" do
+  mode "0755"
 end
 
-template "/etc/hadoop/conf/hdfs-site.xml" do
-  source "hdfs-site.xml.erb"
-  mode "0644"
-
-  variables( :namenode => namenode,
-             :namedir  => node[:hadoop][:hdfs][:name][:dir],
-             :datadir  => node[:hadoop][:hdfs][:data][:dir] )
+group "hdfs" do
+  gid 211
 end
 
-template "/etc/hadoop/conf/masters" do
-  source "masters.erb"
-  mode "0644"
-
-  variables( :secondarynamenodes => search(:node, 'role:SecondaryNameNode').sort_by { |snn| snn[:hostname] } )
+user "hdfs" do
+  uid "211"
+  gid "hdfs"
+  comment "Hadoop HDFS"
+  home "/usr/lib/hadoop-hdfs"
 end
 
-template "/etc/hadoop/conf/slaves" do
-  source "slaves.erb"
-  mode "0644"
+group "hadoop" do
+  action :modify
+  members ["hdfs"]
+  append true
+end
 
-  variables( :datanodes => search(:node, 'role:DataNode').sort_by { |dn| dn[:hostname] } )
+package "hadoop-hdfs" do
+  version node[:hadoop][:version]
 end

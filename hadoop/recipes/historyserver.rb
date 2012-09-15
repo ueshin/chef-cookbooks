@@ -1,8 +1,8 @@
 #
-# Cookbook Name:: flume
-# Recipe:: node
+# Cookbook Name:: hadoop
+# Recipe:: historyserver
 #
-# Copyright 2011, Happy-Camper Street
+# Copyright 2011-2012, Happy-Camper Street
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,12 +17,8 @@
 # limitations under the License.
 #
 
-include_recipe "flume"
+include_recipe "hadoop::proxyserver"
 
-package "flume-node" do
-  version node[:flume][:version]
-end
-
-service "flume-node" do
-  supports :start => true, :stop => true, :restart => true
+package "hadoop-mapreduce-historyserver" do
+  version node[:hadoop][:version]
 end

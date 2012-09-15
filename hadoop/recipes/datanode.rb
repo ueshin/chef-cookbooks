@@ -2,7 +2,7 @@
 # Cookbook Name:: hadoop
 # Recipe:: datanode
 #
-# Copyright 2011, Happy-Camper Street
+# Copyright 2011-2012, Happy-Camper Street
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,23 +19,6 @@
 
 include_recipe "hadoop::hdfs"
 
-node[:hadoop][:hdfs][:data][:dir].each do |dir|
-  directory File.dirname(dir) do
-    mode "0755"
-    recursive true
-  end
-
-  directory dir do
-    owner "hdfs"
-    group "hadoop"
-    mode "0700"
-  end
-end
-
-package "hadoop-0.20-datanode" do
+package "hadoop-hdfs-datanode" do
   version node[:hadoop][:version]
-end
-
-service "hadoop-0.20-datanode" do
-  supports :start => true, :stop => true, :status => true, :restart => true
 end

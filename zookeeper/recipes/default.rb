@@ -2,7 +2,7 @@
 # Cookbook Name:: zookeeper
 # Recipe:: default
 #
-# Copyright 2011, Happy-Camper Street
+# Copyright 2011-2012, Happy-Camper Street
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,32 +18,17 @@
 #
 
 group "zookeeper" do
-  gid 203
+  gid 200
 end
 
 user "zookeeper" do
-  uid "203"
+  uid "200"
   gid "zookeeper"
   comment "ZooKeeper"
   home "/var/run/zookeeper"
   shell "/sbin/nologin"
 end
 
-group "hadoop" do
-  members ["zookeeper"]
-  append true
-end
-
-package "hadoop-zookeeper" do
+package "zookeeper" do
   version node[:zookeeper][:version]
-#  action :upgrade
-end
-
-template "/etc/zookeeper/zoo.cfg" do
-  source "zoo.cfg.erb"
-  mode "0644"
-  owner "zookeeper"
-  group "zookeeper"
-
-  variables( :zookeepers => search(:node, 'role:ZooKeeper').sort_by { |zk| zk[:hostname] } )
 end

@@ -1,8 +1,8 @@
 #
 # Cookbook Name:: hadoop
-# Recipe:: jobtracker
+# Recipe:: resourcemanager
 #
-# Copyright 2011, Happy-Camper Street
+# Copyright 2011-2012, Happy-Camper Street
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,28 +17,8 @@
 # limitations under the License.
 #
 
-include_recipe "hadoop::mapred"
+include_recipe "hadoop::yarn"
 
-node[:hadoop][:mapred][:local][:dir].each do |dir|
-  directory File.dirname(dir) do
-    mode "0755"
-    recursive true
-    not_if do
-      File.exists?(File.dirname(dir))
-    end
-  end
-
-  directory dir do
-    owner "mapred"
-    group "hadoop"
-    mode "0755"
-  end
-end
-
-package "hadoop-0.20-jobtracker" do
+package "hadoop-yarn-resourcemanager" do
   version node[:hadoop][:version]
-end
-
-service "hadoop-0.20-jobtracker" do
-  supports :start => true, :stop => true, :status => true, :restart => true
 end

@@ -2,7 +2,7 @@
 # Cookbook Name:: hbase
 # Attributes:: default
 #
-# Copyright 2011, Happy-Camper Street
+# Copyright 2011-2012, Happy-Camper Street
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,8 +17,4 @@
 # limitations under the License.
 #
 
-default[:hbase][:version] = "0.90.1+15.18"
-
-default[:hbase][:heapsize] = 1000
-
-default[:hbase][:tmp][:dir] = "#{node[:hadoop][:core][:tmp][:dir]}/hbase"
+default[:hbase][:version] = "0.92.1+67-1.cdh4.0.1.p0.1.el6"
