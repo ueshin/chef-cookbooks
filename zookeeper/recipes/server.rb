@@ -20,5 +20,5 @@
 include_recipe "zookeeper"
 
 package "zookeeper-server" do
-  version node[:zookeeper][:version]
+  action [ :install, :upgrade ]
 end

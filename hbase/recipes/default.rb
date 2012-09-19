@@ -32,5 +32,5 @@ user "hbase" do
 end
 
 package "hbase" do
-  version node[:hbase][:version]
+  action [ :install, :upgrade ]
 end

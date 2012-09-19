@@ -30,5 +30,5 @@ user "zookeeper" do
 end
 
 package "zookeeper" do
-  version node[:zookeeper][:version]
+  action [ :install, :upgrade ]
 end

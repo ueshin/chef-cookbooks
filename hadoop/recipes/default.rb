@@ -41,5 +41,5 @@ remote_file "/etc/yum.repos.d/cloudera-cdh4.repo" do
 end
 
 package "hadoop" do
-  version node[:hadoop][:version]
+  action [ :install, :upgrade ]
 end

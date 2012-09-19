@@ -20,5 +20,5 @@
 include_recipe "hadoop::proxyserver"
 
 package "hadoop-mapreduce-historyserver" do
-  version node[:hadoop][:version]
+  action [ :install, :upgrade ]
 end

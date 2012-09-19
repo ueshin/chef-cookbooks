@@ -42,5 +42,5 @@ group "hadoop" do
 end
 
 package "hadoop-mapreduce" do
-  version node[:hadoop][:version]
+  action [ :install, :upgrade ]
 end

@@ -20,5 +20,5 @@
 include_recipe "hadoop::hdfs"
 
 package "hadoop-hdfs-datanode" do
-  version node[:hadoop][:version]
+  action [ :install, :upgrade ]
 end

@@ -20,5 +20,5 @@
 include_recipe "hbase"
 
 package "hbase-regionserver" do
-  version node[:hbase][:version]
+  action [ :install, :upgrade ]
 end

@@ -20,5 +20,5 @@
 include_recipe "hadoop::yarn"
 
 package "hadoop-yarn-nodemanager" do
-  version node[:hadoop][:version]
+  action [ :install, :upgrade ]
 end

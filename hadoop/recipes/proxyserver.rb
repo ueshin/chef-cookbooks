@@ -20,5 +20,5 @@
 include_recipe "hadoop::yarn"
 
 package "hadoop-yarn-proxyserver" do
-  version node[:hadoop][:version]
+  action [ :install, :upgrade ]
 end

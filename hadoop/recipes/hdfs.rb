@@ -41,5 +41,5 @@ group "hadoop" do
 end
 
 package "hadoop-hdfs" do
-  version node[:hadoop][:version]
+  action [ :install, :upgrade ]
 end
