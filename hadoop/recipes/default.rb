@@ -43,3 +43,10 @@ end
 package "hadoop" do
   action [ :install, :upgrade ]
 end
+
+template "/etc/hadoop/conf/core-site.xml" do
+  source "core-site.xml.erb"
+  mode "0644"
+
+  variables( :namenode => search(:node, 'role:NameNode')[0] )
+end
