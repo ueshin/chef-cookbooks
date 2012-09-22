@@ -1,0 +1,11 @@
+{
+    "id"  : "localhost",
+    "name": "localhost",
+    "json_class": "Chef::Node",
+    "run_list": [
+    ],
+    "chef_environment": "default",
+    "automatic": {
+        "hostname": "localhost"
+    }
+}
