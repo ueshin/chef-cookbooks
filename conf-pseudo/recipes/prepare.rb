@@ -54,3 +54,8 @@ end
     creates "/var/chef-solo/cookbooks/#{dir}/chef-solo-search.rb"
   end
 end
+
+cookbook_file "/var/chef-solo/roles/ZooKeeper.rb" do
+  source "ZooKeeper.rb"
+  mode "0644"
+end

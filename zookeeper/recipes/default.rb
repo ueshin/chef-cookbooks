@@ -32,3 +32,12 @@ end
 package "zookeeper" do
   action [ :install, :upgrade ]
 end
+
+template "/etc/zookeeper/conf/zoo.cfg" do
+  source "zoo.cfg.erb"
+  mode "0644"
+  owner "zookeeper"
+  group "zookeeper"
+
+  variables( :zookeepers => search(:node, 'role:ZooKeeper').sort_by { |zk| zk[:hostname] } )
+end

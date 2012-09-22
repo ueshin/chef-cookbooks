@@ -3,9 +3,13 @@
     "name": "localhost",
     "json_class": "Chef::Node",
     "run_list": [
+        "role[ZooKeeper]"
     ],
     "chef_environment": "default",
     "automatic": {
-        "hostname": "localhost"
+        "hostname": "localhost",
+        "zookeeper": {
+            "myid": 0
+        }
     }
 }

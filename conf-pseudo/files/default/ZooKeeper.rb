@@ -1,7 +1,4 @@
 #
-# Cookbook Name:: zookeeper
-# Recipe:: server
-#
 # Copyright 2011-2012, Happy-Camper Street
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,22 +14,5 @@
 # limitations under the License.
 #
 
-include_recipe "zookeeper"
-
-template "/var/lib/zookeeper/myid" do
-  source "myid.erb"
-  mode "0644"
-  owner "zookeeper"
-  group "zookeeper"
-
-  variables( :myid => node[:zookeeper][:myid] )
-end
-
-package "zookeeper-server" do
-  action [ :install, :upgrade ]
-end
-
-service "zookeeper-server" do
-  supports :status => true, :restart => true, :reload => false
-  action [ :disable, :stop ]
-end
+name 'ZooKeeper'
+run_list 'recipe[zookeeper::server]'
