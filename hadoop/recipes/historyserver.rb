@@ -18,7 +18,13 @@
 #
 
 include_recipe "hadoop::proxyserver"
+include_recipe "hadoop::mapreduce"
 
 package "hadoop-mapreduce-historyserver" do
   action [ :install, :upgrade ]
+end
+
+service "hadoop-mapreduce-historyserver" do
+  supports :status => true, :restart => true, :reload => false
+  action [ :disable, :stop ]
 end

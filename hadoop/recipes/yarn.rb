@@ -43,3 +43,14 @@ end
 package "hadoop-yarn" do
   action [ :install, :upgrade ]
 end
+
+template "/etc/hadoop/conf/yarn-site.xml" do
+  source "yarn-site.xml.erb"
+  mode "0644"
+
+  variables( :resourcemanager => search(:node, 'role:ResourceManager')[0],
+
+             :localdirs       => node[:hadoop][:yarn][:nodemanager][:localdirs],
+             :logdirs         => node[:hadoop][:yarn][:nodemanager][:logdirs],
+             :remoteapplogdir => node[:hadoop][:yarn][:nodemanager][:remoteapplogdir] )
+end

@@ -3,5 +3,10 @@
         "role[ZooKeeper]",
         "role[NameNode]",
         "role[SecondaryNameNode]",
-        "role[DataNode]" ]
+        "role[DataNode]",
+        "role[ResourceManager]",
+        "role[NodeManager]",
+        "role[ProxyServer]",
+        "role[HistoryServer]"
+    ]
 }

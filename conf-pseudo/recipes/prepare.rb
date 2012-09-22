@@ -74,3 +74,23 @@ cookbook_file "/var/chef-solo/roles/DataNode.rb" do
   source "DataNode.rb"
   mode "0644"
 end
+
+cookbook_file "/var/chef-solo/roles/ResourceManager.rb" do
+  source "ResourceManager.rb"
+  mode "0644"
+end
+
+cookbook_file "/var/chef-solo/roles/NodeManager.rb" do
+  source "NodeManager.rb"
+  mode "0644"
+end
+
+cookbook_file "/var/chef-solo/roles/ProxyServer.rb" do
+  source "ProxyServer.rb"
+  mode "0644"
+end
+
+cookbook_file "/var/chef-solo/roles/HistoryServer.rb" do
+  source "HistoryServer.rb"
+  mode "0644"
+end

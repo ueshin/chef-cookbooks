@@ -22,3 +22,8 @@ include_recipe "hadoop::yarn"
 package "hadoop-yarn-resourcemanager" do
   action [ :install, :upgrade ]
 end
+
+service "hadoop-yarn-resourcemanager" do
+  supports :status => true, :restart => true, :reload => false
+  action [ :disable, :stop ]
+end

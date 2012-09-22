@@ -44,3 +44,12 @@ end
 package "hadoop-mapreduce" do
   action [ :install, :upgrade ]
 end
+
+template "/etc/hadoop/conf/mapred-site.xml" do
+  source "mapred-site.xml.erb"
+  mode "0644"
+
+  variables( :historyserver => search(:node, 'role:HistoryServer')[0],
+
+             :tasktmpdir    => node[:hadoop][:mapreduce][:task][:tmpdir] )
+end

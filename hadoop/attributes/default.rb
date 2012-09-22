@@ -22,3 +22,9 @@ default[:hadoop][:hdfs][:name][:dir]       = ['/var/lib/hadoop-hdfs/cache/${user
 default[:hadoop][:hdfs][:checkpoint][:dir] = ['/var/lib/hadoop-hdfs/cache/${user.name}/dfs/namesecondary']
 default[:hadoop][:hdfs][:data][:dir]       = ['/var/lib/hadoop-hdfs/cache/${user.name}/dfs/data']
 default[:hadoop][:hdfs][:replication]      = 3
+
+default[:hadoop][:yarn][:nodemanager][:localdirs]       = ['/var/lib/hadoop-yarn/cache/${user.name}/nm-local-dir']
+default[:hadoop][:yarn][:nodemanager][:logdirs]         = ['/var/log/hadoop-yarn/containers']
+default[:hadoop][:yarn][:nodemanager][:remoteapplogdir] = '/var/log/hadoop-yarn/apps'
+
+default[:hadoop][:mapreduce][:task][:tmpdir] = '/var/lib/hadoop-mapreduce/cache/${user.name}/tasks'
