@@ -94,3 +94,13 @@ cookbook_file "/var/chef-solo/roles/HistoryServer.rb" do
   source "HistoryServer.rb"
   mode "0644"
 end
+
+cookbook_file "/var/chef-solo/roles/HBaseMaster.rb" do
+  source "HBaseMaster.rb"
+  mode "0644"
+end
+
+cookbook_file "/var/chef-solo/roles/RegionServer.rb" do
+  source "RegionServer.rb"
+  mode "0644"
+end

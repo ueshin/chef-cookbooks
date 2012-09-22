@@ -34,3 +34,18 @@ end
 package "hbase" do
   action [ :install, :upgrade ]
 end
+
+template "/etc/hbase/conf/hbase-site.xml" do
+  source "hbase-site.xml.erb"
+  mode "0644"
+
+  variables( :namenode     => search(:node, 'role:NameNode')[0],
+             :zookeepers   => search(:node, 'role:ZooKeeper').sort_by { |zk| zk[:hostname] } )
+end
+
+template "/etc/hbase/conf/regionservers" do
+  source "regionservers.erb"
+  mode "0644"
+
+  variables( :regionservers => search(:node, 'role:RegionServer').sort_by { |rs| rs[:hostname] } )
+end

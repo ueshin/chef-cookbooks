@@ -22,3 +22,8 @@ include_recipe "hbase"
 package "hbase-master" do
   action [ :install, :upgrade ]
 end
+
+service "hbase-master" do
+  supports :status => true, :restart => true, :reload => false
+  action [ :disable, :stop ]
+end

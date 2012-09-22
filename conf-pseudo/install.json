@@ -7,6 +7,8 @@
         "role[ResourceManager]",
         "role[NodeManager]",
         "role[ProxyServer]",
-        "role[HistoryServer]"
+        "role[HistoryServer]",
+        "role[HBaseMaster]",
+        "role[RegionServer]"
     ]
 }

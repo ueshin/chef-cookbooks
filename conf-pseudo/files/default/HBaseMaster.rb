@@ -1,7 +1,4 @@
 #
-# Cookbook Name:: hbase
-# Recipe:: regionserver
-#
 # Copyright 2011-2012, Happy-Camper Street
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,13 +14,5 @@
 # limitations under the License.
 #
 
-include_recipe "hbase"
-
-package "hbase-regionserver" do
-  action [ :install, :upgrade ]
-end
-
-service "hbase-regionserver" do
-  supports :status => true, :restart => true, :reload => false
-  action [ :disable, :stop ]
-end
+name 'HBaseMaster'
+run_list 'recipe[hbase::master]'
