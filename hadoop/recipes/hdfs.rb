@@ -43,3 +43,14 @@ end
 package "hadoop-hdfs" do
   action [ :install, :upgrade ]
 end
+
+template "/etc/hadoop/conf/hdfs-site.xml" do
+  source "hdfs-site.xml.erb"
+  mode "0644"
+
+  variables( :tmpdir        => node[:hadoop][:hdfs][:tmp][:dir],
+             :namedir       => node[:hadoop][:hdfs][:name][:dir],
+             :checkpointdir => node[:hadoop][:hdfs][:checkpoint][:dir],
+             :datadir       => node[:hadoop][:hdfs][:data][:dir],
+             :replication   => node[:hadoop][:hdfs][:replication] )
+end

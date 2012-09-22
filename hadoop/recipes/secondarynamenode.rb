@@ -22,3 +22,8 @@ include_recipe "hadoop::hdfs"
 package "hadoop-hdfs-secondarynamenode" do
   action [ :install, :upgrade ]
 end
+
+service "hadoop-hdfs-secondarynamenode" do
+  supports :status => true, :restart => true, :reload => false
+  action [ :disable, :stop ]
+end

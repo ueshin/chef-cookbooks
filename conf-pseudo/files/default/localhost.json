@@ -3,7 +3,10 @@
     "name": "localhost",
     "json_class": "Chef::Node",
     "run_list": [
-        "role[ZooKeeper]"
+        "role[ZooKeeper]",
+        "role[NameNode]",
+        "role[SecondaryNameNode]",
+        "role[DataNode]"
     ],
     "chef_environment": "default",
     "automatic": {

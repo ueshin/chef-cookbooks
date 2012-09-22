@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: hadoop
-# Recipe:: datanode
+# Attributes:: default
 #
 # Copyright 2011-2012, Happy-Camper Street
 #
@@ -17,13 +17,8 @@
 # limitations under the License.
 #
 
-include_recipe "hadoop::hdfs"
-
-package "hadoop-hdfs-datanode" do
-  action [ :install, :upgrade ]
-end
-
-service "hadoop-hdfs-datanode" do
-  supports :status => true, :restart => true, :reload => false
-  action [ :disable, :stop ]
-end
+default[:hadoop][:hdfs][:tmp][:dir]        = '/var/lib/hadoop-hdfs/cache/${user.name}'
+default[:hadoop][:hdfs][:name][:dir]       = ['/var/lib/hadoop-hdfs/cache/${user.name}/dfs/name']
+default[:hadoop][:hdfs][:checkpoint][:dir] = ['/var/lib/hadoop-hdfs/cache/${user.name}/dfs/namesecondary']
+default[:hadoop][:hdfs][:data][:dir]       = ['/var/lib/hadoop-hdfs/cache/${user.name}/dfs/data']
+default[:hadoop][:hdfs][:replication]      = 3

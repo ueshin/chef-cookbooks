@@ -1,3 +1,7 @@
 {
-  "run_list": [ "role[ZooKeeper]" ]
+    "run_list": [
+        "role[ZooKeeper]",
+        "role[NameNode]",
+        "role[SecondaryNameNode]",
+        "role[DataNode]" ]
 }

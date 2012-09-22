@@ -59,3 +59,18 @@ cookbook_file "/var/chef-solo/roles/ZooKeeper.rb" do
   source "ZooKeeper.rb"
   mode "0644"
 end
+
+cookbook_file "/var/chef-solo/roles/NameNode.rb" do
+  source "NameNode.rb"
+  mode "0644"
+end
+
+cookbook_file "/var/chef-solo/roles/SecondaryNameNode.rb" do
+  source "SecondaryNameNode.rb"
+  mode "0644"
+end
+
+cookbook_file "/var/chef-solo/roles/DataNode.rb" do
+  source "DataNode.rb"
+  mode "0644"
+end

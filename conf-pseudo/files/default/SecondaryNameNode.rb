@@ -1,7 +1,4 @@
 #
-# Cookbook Name:: hadoop
-# Recipe:: datanode
-#
 # Copyright 2011-2012, Happy-Camper Street
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,13 +14,5 @@
 # limitations under the License.
 #
 
-include_recipe "hadoop::hdfs"
-
-package "hadoop-hdfs-datanode" do
-  action [ :install, :upgrade ]
-end
-
-service "hadoop-hdfs-datanode" do
-  supports :status => true, :restart => true, :reload => false
-  action [ :disable, :stop ]
-end
+name 'SecondaryNameNode'
+run_list 'recipe[hadoop::secondarynamenode]'
