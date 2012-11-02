@@ -36,7 +36,7 @@ node[:hadoop][:mapred][:local][:dir].each do |dir|
 end
 
 package "hadoop-0.20-jobtracker" do
-  version node[:hadoop][:version]
+  action :install
 end
 
 service "hadoop-0.20-jobtracker" do
