@@ -33,7 +33,7 @@ node[:hadoop][:hdfs][:data][:dir].each do |dir|
 end
 
 package "hadoop-0.20-datanode" do
-  version node[:hadoop][:version]
+  action :install 
 end
 
 service "hadoop-0.20-datanode" do

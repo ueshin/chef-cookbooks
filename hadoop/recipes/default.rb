@@ -71,14 +71,19 @@ directory hadooptmpdir do
   mode "0777"
 end
 
+# FIXME centos only.
+# FIXME cannot specify hadoop version.
 remote_file "/etc/yum.repos.d/cloudera-cdh3.repo" do
-  source "http://archive.cloudera.com/redhat/cdh/cloudera-cdh3.repo"
+  if node[:platform_version].to_f <= 6.0
+    source "http://archive.cloudera.com/redhat/cdh/cloudera-cdh3.repo"
+  else
+    source "http://archive.cloudera.com/redhat/6/x86_64/cdh/cloudera-cdh3.repo"
+  end
   mode "0644"
 end
 
 package "hadoop-0.20" do
-  version node[:hadoop][:version]
-#  action :upgrade
+   action :install
 end
 
 template "/etc/hadoop/conf/hadoop-env.sh" do
