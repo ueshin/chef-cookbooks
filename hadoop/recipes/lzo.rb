@@ -40,3 +40,18 @@ execute "ant compile-native jar" do
   environment( 'CFLAGS' => '-m64', 'JAVA_HOME' => '/usr/java/default' )
   creates "/usr/local/src/#{archive}/build/hadoop-lzo-#{version}.jar"
 end
+
+execute "cp hadoop-lzo-#{node[:hadoop][:lzo][:version]}.jar /usr/lib/hadoop-0.20/lib" do
+  cwd "/usr/local/src/#{node[:hadoop][:lzo][:archive]}/build"
+  creates "/usr/lib/hadoop-0.20/lib/hadoop-lzo-#{node[:hadoop][:lzo][:version]}.jar"
+end
+
+directory "/usr/lib/hadoop-0.20/lib/native/Linux-amd64-64" do
+  mode "0755"
+  recursive true
+end
+
+execute "cp -d native/Linux-amd64-64/lib/* /usr/lib/hadoop-0.20/lib/native/Linux-amd64-64/" do
+  cwd "/usr/local/src/#{node[:hadoop][:lzo][:archive]}/build"
+  creates "/usr/lib/hadoop-0.20/lib/native/Linux-amd64-64/libgplcompression.so.0.0.0"
+end
