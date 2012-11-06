@@ -60,9 +60,11 @@
     <value>true</value>
   </property>
 
+<% if @hadooplzoenabled  -%>
   <property>
     <name>mapred.map.output.compression.codec</name>
     <value>com.hadoop.compression.lzo.LzoCodec</value>
   </property>
+<% end -%>
 
 </configuration>
