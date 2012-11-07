@@ -32,7 +32,7 @@ default[:hadoop][:hdfs][:name][:dir]       = [] #["#{default[:hadoop][:core][:tm
 default[:hadoop][:hdfs][:data][:dir]       = [] #["#{default[:hadoop][:core][:tmp][:dir]}/dfs/data"]
 
 default[:hadoop][:mapred][:local][:dir]    = []  #["#{default[:hadoop][:core][:tmp][:dir]}/mapred/local"]
-default[:hadoop][:mapred][:system][:dir]   = nil # "#{default[:hadoop][:core][:tmp][:dir]}/mapred/system"
+default[:hadoop][:mapred][:system][:dir]   = "#{default[:hadoop][:core][:tmp][:dir]}/mapred/system"
 default[:hadoop][:mapred][:staging][:dir]  = nil # "#{default[:hadoop][:core][:tmp][:dir]}/mapred/staging"
 default[:hadoop][:mapred][:temp][:dir]     = nil # "#{default[:hadoop][:core][:tmp][:dir]}/mapred/temp"
 

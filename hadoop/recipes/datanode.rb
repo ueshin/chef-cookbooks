@@ -34,6 +34,7 @@ end
 
 package "hadoop-0.20-datanode" do
   action :install 
+  notifies :start, "service[hadoop-0.20-datanode]", :immediately
 end
 
 service "hadoop-0.20-datanode" do

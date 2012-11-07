@@ -37,8 +37,31 @@ end
 
 package "hadoop-0.20-namenode" do
   action :install
+  notifies :run, "script[format-namenode]", :immediately
+end
+
+script "format-namenode" do
+  interpreter "bash"
+  user "hdfs"
+  code "hadoop namenode -format"
+  action :nothing
+  notifies :start, "service[hadoop-0.20-namenode]", :immediately
+  notifies :run, "script[create-hdfs-directories]", :immediately
 end
 
 service "hadoop-0.20-namenode" do
   supports :start => true, :stop => true, :status => true, :restart => true, :upgrade => true
+end
+
+script "create-hdfs-directories" do
+  interpreter "bash"
+  user "hdfs"
+  flags "-e"
+  code <<-EOH
+  hadoop fs -mkdir #{node[:hadoop][:core][:tmp][:dir]}
+  hadoop fs -chmod -R 1777 #{node[:hadoop][:core][:tmp][:dir]}
+  hadoop fs -mkdir #{node[:hadoop][:mapred][:system][:dir]}
+  hadoop fs -chown mapred:hadoop #{node[:hadoop][:mapred][:system][:dir]}
+  EOH
+  action :nothing
 end

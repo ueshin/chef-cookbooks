@@ -37,6 +37,7 @@ end
 
 package "hadoop-0.20-jobtracker" do
   action :install
+  notifies :start, "service[hadoop-0.20-jobtracker]", :immediately
 end
 
 service "hadoop-0.20-jobtracker" do
